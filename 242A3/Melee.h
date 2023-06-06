@@ -6,17 +6,17 @@ using namespace std;
 
 class Melee : public Pieces {
 private:
-	int column;
-	char row;
+    int column;
+    char row;
 
 public:
-	Melee();
-	Melee(int, char, int, char);
-	void setColumn(int);
-	int getColumn();
-	void setRow(char);
-	char getRow();
-	Melee(const Melee&);
+    Melee();
+    Melee(int, char, int, char);
+    void setColumn(int);
+    int getColumn();
+    void setRow(char);
+    char getRow();
+    Melee(const Melee&);
 
 };
 #endif
