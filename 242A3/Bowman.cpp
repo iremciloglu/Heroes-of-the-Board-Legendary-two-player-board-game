@@ -34,7 +34,7 @@ int Bowman::hit(Pieces** board2, int player) {
 				Enemy.setLife(newLife);
 			}
 			else {// to decrease the damage per hit temporarily
-				board2[row][i + 1].setCharacter(' ');
+				board2[row][i + 1].setCharacter(' ');//deleting the pieces which is died
 				board2[row][i + 1].setLife(0);
 				tempHit = tempHit - Enemy.getLife();
 			}
