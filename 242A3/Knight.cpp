@@ -32,15 +32,11 @@ void Knight::setCount(int count) {
 int Knight::getCount() {
 	return this->count;
 }
-Pieces** Knight::AttackBonus(Pieces** board1, int r, int c) {
+Pieces* Knight::AttackBonus(Pieces* pieces_list, int count) {
 	int attack = 0;
-	for (int i = 0; i < r; i++) {
-		for (int j = 0; j < c; j++) {
-			if (board1[i][j].getCharacter() != ' ' && board1[i][j].getLife() != 0) {
-				attack = board1[i][j].getDamagePerHit();
-				board1[i][j].setDamagePerHit(attack++);
-			}
-		}
+	for (int i = 0; i < count; i++) {
+		attack = pieces_list[i].getDamagePerHit();
+		pieces_list[i].setDamagePerHit(attack++);
 	}
-	return board1;
+	return pieces_list;
 }

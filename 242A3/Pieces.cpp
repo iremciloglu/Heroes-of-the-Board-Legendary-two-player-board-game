@@ -5,26 +5,22 @@ and my team - mate only */
 #include<iostream>
 #include "Pieces.h"
 Pieces::Pieces() {
-	this->life= 0;
-	this->character = '/0';
+    this->life = 0;
+    this->character = ' ';
 }
 Pieces::Pieces(int life, char ch) {
-	this->life = life;
-	this->character = ch;
+    this->life = life;
+    this->character = ch;
 }
 void Pieces::setLife(int life) {
-	this->life = life;
+    this->life = life;
 }
 int Pieces::getLife() {
-	return this->life;
+    return life;
 }
 char Pieces::getCharacter() {
-	return character;
+    return character;
 }
-void Pieces::setCharacter(char C) {
-	this->character = C;
-}
-
-
 void Pieces::setDamagePerHit(int) {}
 int Pieces::getDamagePerHit() { return 0; }
+Pieces::Pieces(const Pieces&){}

@@ -6,14 +6,14 @@
 using namespace std;
 class Bowman : public Ranged{
 private:
-	int damage_per_hit;
+    int damage_per_hit;
 public:
-	Bowman();
-	Bowman(int, char, int, char, int);
-	void setDamagePerHit(int);
-	int getDamagePerHit();
-	int hit( Pieces**,int);
+    Bowman();
+    Bowman(int, char, int, char, int);
+    void setDamagePerHit(int);
+    int getDamagePerHit();
+    int hit( Pieces**,int);
 };
 
 
-#endif 
+#endif

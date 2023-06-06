@@ -6,17 +6,17 @@ and my team - mate only */
 #include "Swordsman.h"
 
 Swordsman::Swordsman() : Melee() {
-	this->life = 6;
-	this->character = 'W';
-	this->damage_per_hit = 4;
+    this->life = 6;
+    this->character = 'W';
+    this->damage_per_hit = 4;
 }
 Swordsman::Swordsman(int life, char ch, int damage, char row, int column) : Melee(life, ch, column, row) {
-	this->damage_per_hit = damage;
+    this->damage_per_hit = damage;
 }
 void Swordsman::setDamagePerHit(int damage) {
-	this->damage_per_hit = damage;
+    this->damage_per_hit = damage;
 }
 int Swordsman::getDamagePerHit() {
-	return this->damage_per_hit;
+    return this->damage_per_hit;
 }
 
