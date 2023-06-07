@@ -14,12 +14,53 @@
 
 Board::Board() {
 
-    for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 3; j++) {
-            p[i][j] = new Pieces(); // Allocate memory for a new Pieces object
+    this->row_num = 4;
+    this->column_num = 3;
+    this->p = new Pieces* [row_num];
+    
+    for (int i = 0; i < row_num; i++) {
+        p[i] = new Pieces[column_num];
+        for (int j = 0; j < column_num; j++) {
+            p[i][j] = Pieces(); 
         }
     }
+}
 
+Board::Board(Pieces** pieces_list, int row, int column) {
+    this->row_num = row;
+    this->column_num = column;
+    this->p = new Pieces * [row_num];
+
+    for (int i = 0; i < row_num; i++) {
+        p[i] = new Pieces[column_num];
+        for (int j = 0; j < this->column_num; j++) {
+            p[i][j] = pieces_list[i][j];
+        }
+    }
+}
+
+int Board::getRowNum() {
+    return row_num;
+}
+
+void Board::setRowNum(int row) {
+    this->row_num = row;
+}
+
+int Board::getColumnNum() {
+    return column_num;
+}
+
+void Board::setColumnNum(int column) {
+    this->column_num = column;
+}
+
+Pieces** Board::getPieces(void) {
+    return this->p;
+}
+
+void Board::setPieces(Pieces** pieces_list) {
+    this->p = pieces_list;
 }
 
 void Board::showPiece(int x, int y) {
@@ -27,26 +68,24 @@ void Board::showPiece(int x, int y) {
     //if(p[x][y]->getLife()==0)
       //  cout<<"   ";
    // else
-    cout<<p[x][y]->getCharacter()<<"("<<p[x][y]->getLife()<<")"<<" ";
+    cout << p[x][y].getCharacter() <<"("<<p[x][y].getLife()<<")" <<" ";
 
 }
 
+void Board::printBoard(int i) {// take a look irem
 
-
-void Board::printBoard(int i) {
-
-    for(int j=0;j<3;j++) {
-
+    for(int j=0;j<3;j++) 
         showPiece(i, j);
 
-
-    }
     if(i==0)
         cout<<" A";
+
     else if(i==1)
         cout<<" B";
+
     else if(i==2)
         cout<<" C";
+
     else
         cout<<" D";
 
@@ -54,7 +93,7 @@ void Board::printBoard(int i) {
 
 bool Board::isEmptyCoordinate(int x, int y) {
 
-if(p[x][y]->getCharacter()==' ')
+if(p[x][y].getCharacter()==' ')
     return true;
 else
     return false;
@@ -64,40 +103,29 @@ else
 
 void Board::addPiece(int x, int y,char c) {
 
-  if(c=='B')
-  {
-      p[x][y]=new Bowman;
-  }
-  else if(c=='E')
-  {
-      p[x][y]=new Elf;
-  }
-  else if(c=='M')
-  {
-      p[x][y]=new Mage;
-  }
-  else if(c=='S')
-  {
-      p[x][y]=new Spearman;
-  }
-  else if(c=='R')
-  {
-      p[x][y]=new Ranger;
-  }
-  else if(c=='W')
-  {
-      p[x][y]=new Swordsman;
-  }
-  else if(c=='K')
-  {
-      p[x][y]=new Knight;
-  }
+  if(c=='B' || c == 'b')
+      p[x][y]= Bowman();
+  
+  else if(c=='E' || c == 'e')
+      p[x][y]= Elf();
 
+  else if(c=='M' || c == 'm')
+      p[x][y]= Mage();
 
+  else if(c=='S' || c == 's')
+      p[x][y]= Spearman();
+
+  else if(c=='R' || c == 'r')
+      p[x][y]= Ranger();
+
+  else if(c=='W' || c == 'w')
+      p[x][y]= Swordsman();
+
+  else 
+      p[x][y]= Knight();
 }
 
-
-void Board::show_All_Pieces() {
+void Board::showAllPieces() {// bence bunu maine koyabiliriz
 
     cout<<"                         Ranged Pieces\n";
     cout<<"           Life      Damage     Char      Number"<<endl;
@@ -118,41 +146,54 @@ void Board::show_All_Pieces() {
 
 bool Board::checkCharacter(char c) {
 
-    if(c=='B')
-    {
+    if(c=='B' || c == 'E' || c == 'M' || c == 'S' || c == 'R' || c == 'W' || c == 'K')
         return true;
-    }
-    else if(c=='E')
-    {
+    
+    else if(c == 'b' || c == 'e' || c == 'm' || c == 's' || c == 'r' || c == 'w' || c == 'k')
         return true;
-    }
-    else if(c=='M')
-    {
-        return true;
-    }
-    else if(c=='S')
-    {
-        return true;
-    }
-    else if(c=='R')
-    {
-        return true;
-    }
-    else if(c=='W')
-    {
-        return true;
-    }
-    else if(c=='K')
-    {
-        return true;
-    }
+    
     else
         return false;
-
-
 }
 
-int Board::hit(Pieces** board2, int player,int row) {
+Board::~Board() {
+    // Deallocate memory for each row
+    for (int i = 0; i < row_num; i++) {
+        delete[] p[i];
+    }
+    // Deallocate memory for the rows
+    delete[] p;
+}
+
+Board& Board::operator=(const Board& std) {
+    if (this == &std)
+    {
+        return *this;
+    }
+
+    for (int i = 0; i < row_num; i++) {
+        delete[] p[i];
+    }
+    delete[] p;
+
+    this->p = new Pieces * [row_num];
+
+    for (int i = 0; i < row_num; i++) 
+        p[i] = new Pieces[column_num];
+
+    for (int i = 0; i < row_num; i++) {
+        for (int j = 0; j < column_num; j++) {
+            p[i][j] = std.p[i][j];
+        }
+    }
+
+    this->row_num = std.row_num;
+    this->column_num = std.column_num;
+    return *this;
+}
+
+
+/*int Board::hit(Pieces** board2, int player, int row) {
 
 
     int tempHit = damage_per_hit;
@@ -181,4 +222,4 @@ int Board::hit(Pieces** board2, int player,int row) {
 
 
     return player;
-}
+}*/

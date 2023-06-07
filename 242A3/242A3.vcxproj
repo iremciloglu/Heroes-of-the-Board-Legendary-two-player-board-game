@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Board.h" />
     <ClInclude Include="Bowman.h" />
     <ClInclude Include="Elf.h" />
     <ClInclude Include="Knight.h" />
@@ -151,6 +152,7 @@
     <ClInclude Include="Swordsman.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Board.cpp" />
     <ClCompile Include="Bowman.cpp" />
     <ClCompile Include="Elf.cpp" />
     <ClCompile Include="Knight.cpp" />

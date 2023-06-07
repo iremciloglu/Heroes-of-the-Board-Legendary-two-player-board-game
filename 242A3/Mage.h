@@ -16,7 +16,7 @@ public:
     int getLimit();
     void setCount(int);
     int getCount();
-    Pieces* LifeBonus(Pieces*,int);
+    Pieces** LifeBonus(Pieces**, int, int);
 };
 
 
