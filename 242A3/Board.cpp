@@ -16,12 +16,12 @@ Board::Board() {
 
     this->row_num = 4;
     this->column_num = 3;
-    this->p = new Pieces* [row_num];
-    
+    this->p = new Pieces * [row_num];
+
     for (int i = 0; i < row_num; i++) {
         p[i] = new Pieces[column_num];
         for (int j = 0; j < column_num; j++) {
-            p[i][j] = Pieces(); 
+            p[i][j] = Pieces();
         }
     }
 }
@@ -65,93 +65,76 @@ void Board::setPieces(Pieces** pieces_list) {
 
 void Board::showPiece(int x, int y) {
 
-    //if(p[x][y]->getLife()==0)
-      //  cout<<"   ";
-   // else
-    cout << p[x][y].getCharacter() <<"("<<p[x][y].getLife()<<")" <<" ";
-
+    cout << p[x][y].getCharacter() << "(" << p[x][y].getLife() << ")" << " ";
 }
 
-void Board::printBoard(int i) {// take a look irem
+void Board::printBoard(int i, int player) {
 
-    for(int j=0;j<3;j++) 
-        showPiece(i, j);
-
-    if(i==0)
-        cout<<" A";
-
-    else if(i==1)
-        cout<<" B";
-
-    else if(i==2)
-        cout<<" C";
+    if (player == 1)
+        for (int j = 0; j < this->column_num; j++)
+            showPiece(i, j);
 
     else
-        cout<<" D";
+        for (int j = this->column_num - 1; j >= 0; j--)
+            showPiece(i, j);
 
-    }
+
+    if (i == 0)
+        cout << " A";
+
+    else if (i == 1)
+        cout << " B";
+
+    else if (i == 2)
+        cout << " C";
+
+    else
+        cout << " D";
+
+}
 
 bool Board::isEmptyCoordinate(int x, int y) {
 
-if(p[x][y].getCharacter()==' ')
-    return true;
-else
-    return false;
+    if (p[x][y].getCharacter()==' ')
+        return true;
+    else
+        return false;
 
 
 }
 
-void Board::addPiece(int x, int y,char c) {
+void Board::addPiece(int x, int y, char c) {
 
-  if(c=='B' || c == 'b')
-      p[x][y]= Bowman();
-  
-  else if(c=='E' || c == 'e')
-      p[x][y]= Elf();
+    if (c == 'B' || c == 'b')
+        p[x][y] = Bowman();
 
-  else if(c=='M' || c == 'm')
-      p[x][y]= Mage();
+    else if (c == 'E' || c == 'e')
+        p[x][y] = Elf();
 
-  else if(c=='S' || c == 's')
-      p[x][y]= Spearman();
+    else if (c == 'M' || c == 'm')
+        p[x][y] = Mage();
 
-  else if(c=='R' || c == 'r')
-      p[x][y]= Ranger();
+    else if (c == 'S' || c == 's')
+        p[x][y] = Spearman();
 
-  else if(c=='W' || c == 'w')
-      p[x][y]= Swordsman();
+    else if (c == 'R' || c == 'r')
+        p[x][y] = Ranger();
 
-  else 
-      p[x][y]= Knight();
-}
+    else if (c == 'W' || c == 'w')
+        p[x][y] = Swordsman();
 
-void Board::showAllPieces() {// bence bunu maine koyabiliriz
-
-    cout<<"                         Ranged Pieces\n";
-    cout<<"           Life      Damage     Char      Number"<<endl;
-    cout<<"Bowman      12        3         B        Infinite"<<endl;
-    cout<<"Elf         8         6         E        getnum() "<<endl;
-    cout<<"Bowman      4         8         M        getnum"<<endl;
-    cout<<"                         Meele Pieces\n";
-    cout<<"           Life     Damage     Char      Number"<<endl;
-    cout<<"Sperman     6         3         S         Infinite"<<endl;
-    cout<<"Ranger      8         6         R         getnum() "<<endl;
-    cout<<"Swordsman   6         4         W         Infinite"<<endl;
-    cout<<"Knight      10        10        K         getnum"<<endl;
-
-
-
-
+    else
+        p[x][y] = Knight();
 }
 
 bool Board::checkCharacter(char c) {
 
-    if(c=='B' || c == 'E' || c == 'M' || c == 'S' || c == 'R' || c == 'W' || c == 'K')
+    if (c == 'B' || c == 'E' || c == 'M' || c == 'S' || c == 'R' || c == 'W' || c == 'K')
         return true;
-    
-    else if(c == 'b' || c == 'e' || c == 'm' || c == 's' || c == 'r' || c == 'w' || c == 'k')
+
+    else if (c == 'b' || c == 'e' || c == 'm' || c == 's' || c == 'r' || c == 'w' || c == 'k')
         return true;
-    
+
     else
         return false;
 }
@@ -178,7 +161,7 @@ Board& Board::operator=(const Board& std) {
 
     this->p = new Pieces * [row_num];
 
-    for (int i = 0; i < row_num; i++) 
+    for (int i = 0; i < row_num; i++)
         p[i] = new Pieces[column_num];
 
     for (int i = 0; i < row_num; i++) {
@@ -191,35 +174,3 @@ Board& Board::operator=(const Board& std) {
     this->column_num = std.column_num;
     return *this;
 }
-
-
-/*int Board::hit(Pieces** board2, int player, int row) {
-
-
-    int tempHit = damage_per_hit;
-
-    //to hit the enemy
-    for (int i = 2; i >= 0; i--) {
-        if (board2[row][i].getCharacter() != ' ' && board2[row][i].getLife() != 0) {//to check if there is an enemy piece in the same row with it
-            Pieces Enemy;// if it is not empty then it will hit the pieces
-            Enemy = board2[row][i];
-            if (tempHit <= Enemy.getLife()) {//to decrease enemy life
-                int newLife = Enemy.getLife() - tempHit;
-                Enemy.setLife(newLife);
-            }
-            else {// to decrease the damage per hit and kill enemy
-                tempHit = tempHit - Enemy.getLife();
-                Enemy.setLife(0);
-            }
-        }
-        else if(i==0) {// if it is empty then it will hit the player
-            player = player - tempHit;
-        }
-        else
-
-
-    }
-
-
-    return player;
-}*/

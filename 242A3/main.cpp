@@ -6,6 +6,8 @@
 using namespace std;
 
 Pieces** hit(Pieces**, Pieces, int, int);
+void Menu();
+void print2Boards(Board, Board, int);
 
 int main() {
     cout << "Heroes of the Board: Legendary two-player board game!!" << endl;
@@ -27,17 +29,9 @@ int main() {
     while (1) {//Main loop works until program finished
 
         if (turn % 2 == 0) {//Player ones turn
-            cout << "Player 1's turn" << endl;
-            cout << " 1     2     3                       3     2     1" << endl;//irem check here
 
-            for (int i = 0; i < p1_board.getRowNum(); i++) {//For printing the board properly
-                p1_board.printBoard(i);
-                cout << "                  ";
-                p2_board.printBoard(i);
-                cout << endl;
-            }
-
-            p1_board.showAllPieces();
+            print2Boards(p1_board, p2_board, 1);
+            Menu();
 
             do {//to check if char input is valid
                 cout << "Select the character you want:";
@@ -52,6 +46,7 @@ int main() {
                 cin >> coordinate_char >> coordinate_num;
                 int row;
                 //to check if coordinate input is valid
+
                 if (coordinate_num > 0 && coordinate_num < p1_board.getColumnNum() + 1 &&
                     (coordinate_char == 'A' || coordinate_char == 'a' || coordinate_char == 'B' || coordinate_char == 'b'
                         || coordinate_char == 'C' || coordinate_char == 'c' || coordinate_char == 'D' || coordinate_char == 'd')) {
@@ -65,16 +60,18 @@ int main() {
                     else
                         row = 3;
 
-                    if (p1_board.isEmptyCoordinate(row, coordinate_num - 1)) {// to check if entered coordinate is empty or not
+                    /*if (p1_board.isEmptyCoordinate(row, coordinate_num - 1)) {// to check if entered coordinate is empty or not
+                        cout << "check3";
                         p1_board.addPiece(row, coordinate_num - 1, character_char);
                         break;
                     }
                     else
-                        cout << "The coordinates given has already has a piece!" << endl;
+                        cout << "The coordinates given has already has a piece!" << endl;*/
+                    p1_board.addPiece(row, coordinate_num - 1, character_char);
                 }
                 cout << "Please write a proper coordinate!\n";
             } while (1);
-        
+
             for (int i = 0; i < p1_board.getRowNum(); i++) {// trying to implement hit
                 for (int j = 0; j < p1_board.getColumnNum(); j++) {
                     p2_board.setPieces(hit(p2_board.getPieces(), p1_board.getPieces()[i][j], player2, i));
@@ -83,17 +80,9 @@ int main() {
         }
 
         if (turn % 2 == 1) {//Player twos turn
-            
-            cout << "Player 2's turn" << endl;
-            cout << " 1     2     3                       3     2     1" << endl;
-            for (int i = 0; i < 4; i++) { //For printing the board properly
-                p1_board.printBoard(i);
-                cout << "                  ";
-                p2_board.printBoard(i);
-                cout << endl;
-            }
 
-            p2_board.showAllPieces();
+            print2Boards(p1_board, p2_board, 2);
+            Menu();
 
             do {//to check if char input is valid
                 cout << "Select the character you want:";
@@ -121,12 +110,14 @@ int main() {
                     else
                         row = 3;
 
-                    if (p2_board.isEmptyCoordinate(row, coordinate_num - 1)) {// to check if entered coordinate is empty or not
+                   /* if (p2_board.isEmptyCoordinate(row, coordinate_num - 1)) {// to check if entered coordinate is empty or not
+                        cout << "check3";
                         p2_board.addPiece(row, coordinate_num - 1, character_char);
                         break;
                     }
                     else
-                        cout << "The coordinates given has already has a piece!" << endl;
+                        cout << "The coordinates given has already has a piece!" << endl;*/
+                    p2_board.addPiece(row, coordinate_num - 1, character_char);
                 }
                 cout << "Please write a proper coordinate!\n";
             } while (1);
@@ -143,12 +134,41 @@ int main() {
     return 0;
 }
 
+void print2Boards(Board p1_board, Board p2_board, int player) {
+
+    cout << "Player " << player << "'s turn" << endl;
+    cout << " 1     2     3                       3     2     1" << endl;
+
+    for (int i = 0; i < p1_board.getRowNum(); i++) {//For printing the board properly
+        p1_board.printBoard(i, 1);//printing one row each time according to player1
+        cout << "                  ";
+        p2_board.printBoard(i, 2);//printing one row each time according to player2
+        cout << endl;
+    }
+}
+
+void Menu() {
+
+    cout << "                         Ranged Pieces\n";
+    cout << "           Life      Damage     Char      Number" << endl;
+    cout << "Bowman      12        3         B        Infinite" << endl;
+    cout << "Elf         8         6         E        getnum() " << endl;
+    cout << "Bowman      4         8         M        getnum" << endl;
+    cout << "                         Meele Pieces\n";
+    cout << "           Life     Damage     Char      Number" << endl;
+    cout << "Sperman     6         3         S         Infinite" << endl;
+    cout << "Ranger      8         6         R         getnum() " << endl;
+    cout << "Swordsman   6         4         W         Infinite" << endl;
+    cout << "Knight      10        10        K         getnum" << endl;
+
+}
+
 Pieces** hit(Pieces** enemy_board, Pieces myPiece, int enemy_player, int row) {
     int tempHit = myPiece.getDamagePerHit();
     Pieces Temp;
     for (int i = 2; i >= 0; i--) {// it enters the loop 3 times with the same coordinate i guess, idk why!!!!
-        if (enemy_board[row][i].getCharacter() != ' ' ||  enemy_board[row][i].getLife() != 0) {
-             cout << "Check: r:  "<< row<< "   c:"<< i << endl;
+        if (enemy_board[row][i].getCharacter() != ' ' || enemy_board[row][i].getLife() != 0) {
+            cout << "Check: r:  " << row << "   c:" << i << endl;
             if (tempHit <= enemy_board[row][i].getLife()) {
                 int newLife = enemy_board[row][i].getLife() - tempHit;
                 enemy_board[row][i].setLife(newLife);

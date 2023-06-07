@@ -16,13 +16,13 @@ void Pieces::setLife(int life) {
     this->life = life;
 }
 int Pieces::getLife() {
-    return life;
+    return this->life;
 }
 void Pieces::setCharacter(int C) {
     this->character = C;
 }
 char Pieces::getCharacter() {
-    return character;
+    return this->character;
 }
 void Pieces::setDamagePerHit(int) {}
 int Pieces::getDamagePerHit() { return 0; }
