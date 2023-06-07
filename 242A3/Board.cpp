@@ -21,7 +21,7 @@ Board::Board() {
     for (int i = 0; i < row_num; i++) {
         p[i] = new Pieces[column_num];
         for (int j = 0; j < column_num; j++) {
-            p[i][j] = Pieces();
+            p[i][j] =  Pieces();
         }
     }
 }
@@ -60,7 +60,9 @@ Pieces** Board::getPieces(void) {
 }
 
 void Board::setPieces(Pieces** pieces_list) {
-    this->p = pieces_list;
+    for(int i=0;i<row_num;i++)
+        for(int j=0;j<column_num;j++)
+            this->p[i][j].operator=(pieces_list[i][j]);
 }
 
 void Board::showPiece(int x, int y) {
@@ -94,19 +96,17 @@ void Board::printBoard(int i, int player) {
 }
 
 bool Board::isEmptyCoordinate(int x, int y) {
-
+    showPiece(x, y);
     if (p[x][y].getCharacter()==' ')
         return true;
     else
         return false;
-
-
 }
 
 void Board::addPiece(int x, int y, char c) {
 
     if (c == 'B' || c == 'b')
-        p[x][y] = Bowman();
+        p[x][y].operator=(Bowman());
 
     else if (c == 'E' || c == 'e')
         p[x][y] = Elf();

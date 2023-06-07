@@ -8,7 +8,7 @@ using namespace std;
 #include <iostream>
 
 class Board {
-private:
+    private:
     int row_num;
     int column_num;
     Pieces** p;
