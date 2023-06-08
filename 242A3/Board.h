@@ -8,10 +8,14 @@ using namespace std;
 #include <iostream>
 
 class Board {
-    private:
+private:
     int row_num;
     int column_num;
     Pieces** p;
+    int mage_count;
+    int knight_count;
+    int elf_count;
+    int ranger_count;
 public:
     Board();
     Board(Pieces**, int, int);
@@ -27,6 +31,10 @@ public:
     bool isEmptyCoordinate(int, int);
     void addPiece(int, int, char);
     bool checkCharacter(char);
+    int getMageCount(void);
+    int getElfCount(void);
+    int getKnightCount(void);
+    int getRangerCount(void);
     ~Board();
     Board& operator=(const Board&);
 };

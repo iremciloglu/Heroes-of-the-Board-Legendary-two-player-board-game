@@ -20,10 +20,16 @@ Board::Board() {
 
     for (int i = 0; i < row_num; i++) {
         p[i] = new Pieces[column_num];
+    }
+    for (int i = 0; i < row_num; i++) {
         for (int j = 0; j < column_num; j++) {
-            p[i][j] =  Pieces();
+            p[i][j] = Pieces();
         }
     }
+    elf_count = 3;
+    mage_count = 2;
+    ranger_count = 2;
+    knight_count = 1;
 }
 
 Board::Board(Pieces** pieces_list, int row, int column) {
@@ -60,8 +66,8 @@ Pieces** Board::getPieces(void) {
 }
 
 void Board::setPieces(Pieces** pieces_list) {
-    for(int i=0;i<row_num;i++)
-        for(int j=0;j<column_num;j++)
+    for (int i = 0; i < row_num; i++)
+        for (int j = 0; j < column_num; j++)
             this->p[i][j].operator=(pieces_list[i][j]);
 }
 
@@ -92,39 +98,69 @@ void Board::printBoard(int i, int player) {
 
     else
         cout << " D";
-
 }
 
 bool Board::isEmptyCoordinate(int x, int y) {
-    showPiece(x, y);
-    if (p[x][y].getCharacter()==' ')
+
+    if (p[x][y].getLife() == 0)
         return true;
     else
         return false;
 }
 
-void Board::addPiece(int x, int y, char c) {
+void Board::addPiece(int x, int y, char c) { //if else aç?p boardda o piece için yeterli say? yoksa ba?tan karakter seçtirsin
 
     if (c == 'B' || c == 'b')
-        p[x][y].operator=(Bowman());
+        p[x][y] = Bowman();
 
-    else if (c == 'E' || c == 'e')
-        p[x][y] = Elf();
+    if (c == 'E' || c == 'e') {
+        if (elf_count != 0) {
+            p[x][y] = Elf();
+            elf_count--;
+        }
+        else
+            cout << "There is no Elf left!" << endl;
 
-    else if (c == 'M' || c == 'm')
-        p[x][y] = Mage();
+    }
 
-    else if (c == 'S' || c == 's')
+    if (c == 'M' || c == 'm')
+    {
+        if (mage_count != 0) {
+            p[x][y] = Mage();
+            mage_count--;
+        }
+        else
+            cout << "There is no Mage left!" << endl;
+
+    }
+
+    if (c == 'S' || c == 's')
         p[x][y] = Spearman();
 
-    else if (c == 'R' || c == 'r')
-        p[x][y] = Ranger();
+    if (c == 'R' || c == 'r')
+    {
+        if (ranger_count != 0) {
+            p[x][y] = Ranger();
+            ranger_count--;
+        }
+        else
+            cout << "There is no Ranger left!" << endl;
 
-    else if (c == 'W' || c == 'w')
+    }
+
+    if (c == 'W' || c == 'w')
         p[x][y] = Swordsman();
 
-    else
-        p[x][y] = Knight();
+    if (c == 'K' || c == 'k')
+    {
+        if (knight_count != 0) {
+            p[x][y] = Knight();
+            knight_count--;
+        }
+        else
+            cout << "There is no Knight left!" << endl;
+
+    }
 }
 
 bool Board::checkCharacter(char c) {
@@ -173,4 +209,22 @@ Board& Board::operator=(const Board& std) {
     this->row_num = std.row_num;
     this->column_num = std.column_num;
     return *this;
+}
+
+int Board::getElfCount() {
+
+    return elf_count;
+
+}
+
+int Board::getKnightCount() {
+    return knight_count;
+}
+
+int Board::getMageCount() {
+    return mage_count;;
+}
+
+int Board::getRangerCount() {
+    return ranger_count;
 }

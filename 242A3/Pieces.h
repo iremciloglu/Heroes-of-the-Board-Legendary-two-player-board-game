@@ -17,6 +17,6 @@ public:
     void setCharacter(int);
     virtual void setDamagePerHit(int);
     virtual int getDamagePerHit();
-    Pieces& operator=(const Pieces& std);
+    Pieces& operator=(const Pieces&);
 };
 #endif

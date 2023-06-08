@@ -10,10 +10,8 @@ Mage::Mage() : Ranged(){
 	this->character = 'M';
 	this->damage_per_hit = 8;
 	this->use_limit=2;
-	this->count=0;
 }
-Mage::Mage(int life, char ch, int damage, char row, int column, int count) : Ranged(life,ch,column,row){
-	this->count = count;
+Mage::Mage(int life, char ch, int damage, char row, int column) : Ranged(life,ch,column,row){
 	this->damage_per_hit = damage;
 }
 void Mage::setDamagePerHit(int damage) {
@@ -24,13 +22,6 @@ int Mage::getDamagePerHit() {
 }
 int Mage::getLimit() {
 	return use_limit;
-}
-void Mage::setCount(int count) {
-	if (count <= this->use_limit)
-		this->count = count;
-}
-int Mage::getCount() {
-	return this->count;
 }
 
 Pieces** Mage::LifeBonus(Pieces** board1, int r, int c) {

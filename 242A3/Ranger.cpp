@@ -10,10 +10,8 @@ Ranger::Ranger() : Melee() {
     this->character = 'R';
     this->damage_per_hit = 6;
     this->use_limit = 2;
-    this->count = 0;
 }
 Ranger::Ranger(int life, char ch, int damage, char row, int column, int count) : Melee(life, ch, column, row) {
-    this->count = count;
     this->damage_per_hit = damage;
 }
 void Ranger::setDamagePerHit(int damage) {
@@ -25,10 +23,4 @@ int Ranger::getDamagePerHit() {
 int Ranger::getLimit() {
     return use_limit;
 }
-void Ranger::setCount(int count) {
-    if (count <= this->use_limit)
-        this->count = count;
-}
-int Ranger::getCount() {
-    return this->count;
-}
+

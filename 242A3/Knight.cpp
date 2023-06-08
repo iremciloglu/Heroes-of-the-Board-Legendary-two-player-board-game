@@ -10,10 +10,8 @@ Knight::Knight() : Melee() {
 	this->character = 'K';
 	this->damage_per_hit = 10;
 	this->use_limit = 1;
-	this->count = 0;
 }
-Knight::Knight(int life, char ch, int damage, char row, int column, int count) : Melee(life, ch, column, row) {
-	this->count = count;
+Knight::Knight(int life, char ch, int damage, char row, int column) : Melee(life, ch, column, row) {
 	this->damage_per_hit = damage;
 }
 void Knight::setDamagePerHit(int damage) {
@@ -24,13 +22,6 @@ int Knight::getDamagePerHit() {
 }
 int Knight::getLimit() {
 	return use_limit;
-}
-void Knight::setCount(int count) {
-	if (count <= this->use_limit)
-		this->count = count;
-}
-int Knight::getCount() {
-	return this->count;
 }
 Pieces* Knight::AttackBonus(Pieces* pieces_list, int count) {
 	int attack = 0;
