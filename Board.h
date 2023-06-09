@@ -11,7 +11,7 @@ class Board {
 private:
     int row_num;
     int column_num;
-    Pieces** p;
+    Pieces*** p;
     int mage_count;
     int knight_count;
     int elf_count;
@@ -23,7 +23,7 @@ public:
     void setRowNum(int);
     int getColumnNum();
     void setColumnNum(int);
-    Pieces** getPieces(void);
+    Pieces*** getPieces(void);
     void setPieces(Pieces**);
     void showPiece(int, int);
     // Pieces getPieceInfo(int x, int y);

@@ -16,7 +16,7 @@ Swordsman::Swordsman(int life, char ch, int damage, char row, int column) : Mele
 void Swordsman::setDamagePerHit(int damage) {
     this->damage_per_hit = damage;
 }
-int Swordsman::getDamagePerHit() {
+/*int Swordsman::getDamagePerHit() {
     return this->damage_per_hit;
-}
+}*/
 

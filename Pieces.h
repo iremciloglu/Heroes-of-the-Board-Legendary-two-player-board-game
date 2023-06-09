@@ -7,6 +7,7 @@ class Pieces {
 protected:
     int life;
     char character;
+    int damage_per_hit;
 
 public:
     Pieces();

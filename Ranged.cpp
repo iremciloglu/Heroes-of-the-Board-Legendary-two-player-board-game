@@ -5,25 +5,25 @@ and my team - mate only */
 #include<iostream>
 #include "Ranged.h"
 Ranged::Ranged() : Pieces() {
-	this->column = 0;
-	this->row = 'A';
+    this->column = 0;
+    this->row = 'A';
 }
 Ranged::Ranged(int life, char ch, int column, char row) : Pieces(life, ch) {
-	if(column==1 || column==2)
-		this->column = column;
-	this->row = row;
+    if(column==1 || column==2)
+        this->column = column;
+    this->row = row;
 }
 void Ranged::setColumn(int column) {
-	if (column == 1 || column == 2)
-		this->column = column;
+    if (column == 1 || column == 2)
+        this->column = column;
 }
 int Ranged::getColumn() {
-	return this->column;
+    return this->column;
 }
 void Ranged::setRow(char row) {
-	this->row = row;
+    this->row = row;
 }
 char Ranged::getRow() {
-	return this->row;
+    return this->row;
 }
 Ranged::Ranged(const Ranged&) {}

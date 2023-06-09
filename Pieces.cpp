@@ -7,6 +7,8 @@ and my team - mate only */
 Pieces::Pieces() {
     this->life = 0;
     this->character = ' ';
+    this->damage_per_hit=0;
+
 }
 Pieces::Pieces(int life, char ch) {
     this->life = life;
@@ -34,6 +36,7 @@ Pieces& Pieces::operator=(const Pieces& std) {
     }
     this->life = std.life;
     this->character = std.character;
+    this->damage_per_hit=std.damage_per_hit;
 
     return *this;
 }

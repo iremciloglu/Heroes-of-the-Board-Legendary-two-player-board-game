@@ -5,17 +5,17 @@
 using namespace std;
 class Knight : public Melee {
 private:
-    int damage_per_hit;
+
     int use_limit;
-    int count;
 public:
     Knight();
-    Knight(int, char, int, char, int, int);
+    Knight(int, char, int, char, int);
     void setDamagePerHit(int);
-    int getDamagePerHit();
+    int getDamagePerHit() override {
+        cout<<"arabam";
+        return damage_per_hit;
+    }
     int getLimit();
-    void setCount(int);
-    int getCount();
     Pieces* AttackBonus(Pieces*,int);
 };
 

@@ -16,14 +16,14 @@ Board::Board() {
 
     this->row_num = 4;
     this->column_num = 3;
-    this->p = new Pieces * [row_num];
+    p =new Pieces ** [row_num];
 
     for (int i = 0; i < row_num; i++) {
-        p[i] = new Pieces[column_num];
+        p[i] = new Pieces*[column_num];
     }
    for (int i = 0; i < row_num; i++){
     for (int j = 0; j < column_num; j++) {
-        p[i][j] =  Pieces();
+        p[i][j] =  new Pieces();
     }}
     elf_count=3;
     mage_count=2;
@@ -34,12 +34,12 @@ Board::Board() {
 Board::Board(Pieces** pieces_list, int row, int column) {
     this->row_num = row;
     this->column_num = column;
-    this->p = new Pieces * [row_num];
+    *p = new Pieces * [row_num];
 
     for (int i = 0; i < row_num; i++) {
-        p[i] = new Pieces[column_num];
+        *p[i] = new Pieces[column_num];
         for (int j = 0; j < this->column_num; j++) {
-            p[i][j] = pieces_list[i][j];
+            *p[i][j] = pieces_list[i][j];
         }
     }
 }
@@ -60,19 +60,21 @@ void Board::setColumnNum(int column) {
     this->column_num = column;
 }
 
-Pieces** Board::getPieces(void) {
-    return this->p;
+Pieces*** Board::getPieces(void) {
+    return p;
 }
 
 void Board::setPieces(Pieces** pieces_list) {
     for(int i=0;i<row_num;i++)
         for(int j=0;j<column_num;j++)
-            this->p[i][j].operator=(pieces_list[i][j]);
+            this->p[i][j]->operator=(pieces_list[i][j]);
 }
 
 void Board::showPiece(int x, int y) {
-
-    cout << p[x][y].getCharacter() << "(" << p[x][y].getLife() << ")" << " ";
+      if(p[x][y]->getLife()!=0)
+    cout << p[x][y]->getCharacter() << "(" << p[x][y]->getLife() << ")" << " ";
+      else
+          cout << "(" << p[x][y]->getLife() << ")" << " ";
 }
 
 void Board::printBoard(int i, int player) {
@@ -101,7 +103,7 @@ void Board::printBoard(int i, int player) {
 
 bool Board::isEmptyCoordinate(int x, int y) {
 
-    if (p[x][y].getLife()==0)
+    if (p[x][y]->getLife()==0)
         return true;
     else
         return false;
@@ -111,7 +113,7 @@ bool Board::addPiece(int x, int y, char c) { //if else açıp boardda o piece i�
 
     if (c == 'B' || c == 'b') {
         if(y==0 || y==1)
-        { p[x][y] = Bowman();
+        { p[x][y] = new Bowman();
         return true;}
         else
             return false;
@@ -119,7 +121,7 @@ bool Board::addPiece(int x, int y, char c) { //if else açıp boardda o piece i�
     }
     if (c == 'E' || c == 'e') {
         if(y==0 || y==1)
-        {  p[x][y] = Elf();
+        {  p[x][y] = new Elf();
             elf_count--;
             return true;}
         else
@@ -136,7 +138,7 @@ bool Board::addPiece(int x, int y, char c) { //if else açıp boardda o piece i�
 
      {
          if(y==0 || y==1)
-         { p[x][y] = Mage();
+         { p[x][y] = new Mage();
              mage_count--;
              return true;}
          else
@@ -152,7 +154,7 @@ bool Board::addPiece(int x, int y, char c) { //if else açıp boardda o piece i�
      if (c == 'S' || c == 's')
      {
          if(y==1 || y==2)
-         { p[x][y] = Spearman();
+         { p[x][y] = new Spearman();
              return true;}
          else
              return false;
@@ -162,7 +164,7 @@ bool Board::addPiece(int x, int y, char c) { //if else açıp boardda o piece i�
      if (c == 'R' || c == 'r')
      {
          if(y==2 || y==1)
-         {  p[x][y] = Ranger();
+         {  p[x][y] = new Ranger();
              ranger_count--;;
              return true;}
          else
@@ -178,7 +180,7 @@ bool Board::addPiece(int x, int y, char c) { //if else açıp boardda o piece i�
      if (c == 'W' || c == 'w')
      {
          if(y==2 || y==1)
-         { p[x][y] = Swordsman();
+         { p[x][y] = new Swordsman();
              return true;}
          else
              return false;
@@ -188,7 +190,7 @@ bool Board::addPiece(int x, int y, char c) { //if else açıp boardda o piece i�
     if(c=='K' || c=='k')
     {
         if(y==2 || y==1)
-        { p[x][y] = Knight();
+        { p[x][y] = new Knight();
             knight_count--;
             return true;}
         else
@@ -199,7 +201,7 @@ bool Board::addPiece(int x, int y, char c) { //if else açıp boardda o piece i�
 
 
 
-
+return false;
 }
 
 bool Board::checkCharacter(char c) {
@@ -234,10 +236,10 @@ Board& Board::operator=(const Board& std) {
     }
     delete[] p;
 
-    this->p = new Pieces * [row_num];
+    *p = new Pieces * [row_num];
 
     for (int i = 0; i < row_num; i++)
-        p[i] = new Pieces[column_num];
+        *p[i] = new Pieces[column_num];
 
     for (int i = 0; i < row_num; i++) {
         for (int j = 0; j < column_num; j++) {

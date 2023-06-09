@@ -5,13 +5,16 @@
 using namespace std;
 class Spearman : public Melee {
 private:
-    int damage_per_hit;
+
 public:
     Spearman();
     Spearman(int, char, int, char, int);
     void setDamagePerHit(int);
-    int getDamagePerHit();
+    int getDamagePerHit()override {
+        return this->damage_per_hit;
+    }
 };
 
 
-#endif 
+#endif
+

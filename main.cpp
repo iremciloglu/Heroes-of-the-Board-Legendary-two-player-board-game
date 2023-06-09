@@ -11,7 +11,7 @@ void print2Boards(Board, Board, int);
 
 int main() {
     cout << "Heroes of the Board: Legendary two-player board game!!" << endl;
-    int player1 = 10, player2 = 10, turn, coordinate_num;
+    int player1 = 100, player2 = 100, turn, coordinate_num,tempHit;
     char coordinate_char, character_char;
     Board p1_board = Board();
     Board p2_board = Board();
@@ -27,12 +27,12 @@ int main() {
         turn = 1;
     }//Turn%2==1 is always player 2's turn
 
-    while (1) {//Main loop works until program finished
+    while (player2>0 && player1>0) {//Main loop works until program finished
 
         if (turn % 2 == 0) {//Player ones turn
 
             cout << "\nPlayer " << 1 << "'s turn" << endl;
-            cout << " 1     2     3                       3     2     1" << endl;
+            cout << " 1   2   3                       3   2   1" << endl;
 
             for (int i = 0; i < p1_board.getRowNum(); i++) {//For printing the board properly
                 p1_board.printBoard(i, 1);//printing one row each time according to player1
@@ -100,41 +100,53 @@ int main() {
             } while (1);// here the placement of the character is done
 
             for (int i = 0; i < p1_board.getRowNum(); i++) {// trying to implement hit
-                for (int j = 0; j < p1_board.getColumnNum(); j++) {
-                    cout << "check3";
 
 
-                    int tempHit = p1_board.getPieces()[i][j].getDamagePerHit();
+                for (int j = p1_board.getColumnNum()-1; j >= 0; j--) {
+                    /*if(p2_board.isEmptyCoordinate(i,j))
+                        tempHit = 0;
+                    else
+                        tempHit=3;*/
+                    tempHit = p1_board.getPieces()[i][j]->getDamagePerHit();//override yap
+                    cout << "Hit:" << tempHit << endl;
+                    // only one piece in the a row hits enemy!
+                    // alt rowla devam ediyor kendi row bitince
+                    // only one piece in the a row GETS HIt by the enemy!
+                    for(int k=p1_board.getColumnNum()-1;k>=0;k--) {
 
-                    for (int k = 2; k >= 0; k--) {// it enters the loop 3 times with the same coordinate i guess, idk why!!!!
-                        if (p2_board.getPieces()[i][k].getCharacter() != ' ' || p2_board.getPieces()[i][k].getLife() != 0) {
-                            cout << "Check: r:  " << i << "   c:" << i << endl;
-                            if (tempHit <=  p2_board.getPieces()[i][k].getLife()) {
-                                int newLife =  p2_board.getPieces()[i][k].getLife() - tempHit;
-                                p2_board.getPieces()[i][k].setLife(newLife);
-                            }
-                            else {
-                                tempHit = tempHit -  p2_board.getPieces()[i][k].getLife();
-                                p2_board.getPieces()[i][k+1].setCharacter(' '); //This means its dead
-                                p2_board.getPieces()[i][k+1].setLife(0);
+                        if (p2_board.getPieces()[i][k]->getCharacter() != ' ' ||
+                            p2_board.getPieces()[i][k]->getLife() != 0) {
+                            cout << "Check: r:  " << i << "   c:" << j << endl;
+                            if (tempHit <= p2_board.getPieces()[i][k]->getLife()) { //If not dead
+                                int newLife = p2_board.getPieces()[i][k]->getLife() - tempHit;
+                                p2_board.getPieces()[i][k]->setLife(newLife);
+                                int newl = p2_board.getPieces()[i][k]->getLife();
+                                cout << "new life" << newl;
+                                tempHit = 0;
+                            } else { //If dead
+                                tempHit = tempHit - p2_board.getPieces()[i][k]->getLife();
+                                p2_board.getPieces()[i][k]->setCharacter(' '); //This means its dead
+                                p2_board.getPieces()[i][k]->setLife(0);
                             }
                         }
-                        else if (i == 0) {
-                            player2 = player2 - tempHit;
-                        }
+
                     }
+                    if(p1_board.getPieces()[i][j]->getDamagePerHit()==tempHit) {
+                        player2 = player2 - tempHit;
 
+                    }
 
 
 
                 }
             }
+            cout<<"\nPlayer 2's life is "<<player2;
         }
 
         if (turn % 2 == 1) {//Player twos turn
 
             cout << "\nPlayer " << 2 << "'s turn" << endl;
-            cout << " 1     2     3                       3     2     1" << endl;
+            cout << " 1   2   3                       3   2   1" << endl;
 
             for (int i = 0; i < p1_board.getRowNum(); i++) {//For printing the board properly
                 p1_board.printBoard(i, 1);//printing one row each time according to player1
@@ -195,41 +207,56 @@ int main() {
                 cout << "Please write a proper coordinate!\n";
             } while (1);
 
-            for (int i = 0; i < p1_board.getRowNum(); i++) {// trying to implement hit
-                for (int j = 0; j < p1_board.getColumnNum(); j++) {
-                    cout << "check3";
+            for (int i = 0; i < p2_board.getRowNum(); i++) {// trying to implement hit
 
 
-                    int tempHit = p1_board.getPieces()[i][j].getDamagePerHit();
+                for (int j = p2_board.getColumnNum()-1; j >= 0; j--) {
+                    /*if(p2_board.isEmptyCoordinate(i,j))
+                        tempHit = 0;
+                    else
+                        tempHit=3;*/
+                    tempHit = p2_board.getPieces()[i][j]->getDamagePerHit();//override yap
+                    cout << "Hit:" << tempHit << endl;
+                    // only one piece in the a row hits enemy!
+                    // alt rowla devam ediyor kendi row bitince
+                    // only one piece in the a row GETS HIt by the enemy!
+                    for(int k=p2_board.getColumnNum()-1;k>=0;k--) {
 
-                    for (int k = 2; k >= 0; k--) {// it enters the loop 3 times with the same coordinate i guess, idk why!!!!
-                        if (p2_board.getPieces()[i][k].getCharacter() != ' ' || p2_board.getPieces()[i][k].getLife() != 0) {
-                            cout << "Check: r:  " << i << "   c:" << i << endl;
-                            if (tempHit <=  p2_board.getPieces()[i][k].getLife()) {
-                                int newLife =  p2_board.getPieces()[i][k].getLife() - tempHit;
-                                p2_board.getPieces()[i][k].setLife(newLife);
-                            }
-                            else {
-                                tempHit = tempHit -  p2_board.getPieces()[i][k].getLife();
-                                p2_board.getPieces()[i][k+1].setCharacter(' '); //This means its dead
-                                p2_board.getPieces()[i][k+1].setLife(0);
+                        if (p1_board.getPieces()[i][k]->getCharacter() != ' ' ||
+                            p1_board.getPieces()[i][k]->getLife() != 0) {//If there is a piece
+                            cout << "Check: r:  " << i << "   c:" << j << endl;
+                            if (tempHit <= p1_board.getPieces()[i][k]->getLife()) { //If not dead
+                                int newLife = p1_board.getPieces()[i][k]->getLife() - tempHit;
+                                p1_board.getPieces()[i][k]->setLife(newLife);
+                                int newl = p1_board.getPieces()[i][k]->getLife();
+                                cout << "new life" << newl;
+                                tempHit = 0;
+                            } else { //If dead
+                                tempHit = tempHit - p1_board.getPieces()[i][k]->getLife();
+                                p1_board.getPieces()[i][k]->setCharacter(' '); //This means its dead
+                                p1_board.getPieces()[i][k]->setLife(0);
                             }
                         }
-                        else if (i == 0) {
-                            player2 = player2 - tempHit;
-                        }
+
                     }
+                    if(p2_board.getPieces()[i][j]->getDamagePerHit()==tempHit) {
 
+                        player1 = player1 - tempHit;
+                    }
 
 
 
                 }
             }
             //Ataklar olucak
+            cout<<"\nPlayer 1's life is "<<player1;
         }
         turn++;
     }
-    return 0;
+    if(player1<=0)
+        cout<<"\nThe winner is Player 2!!";
+    else
+        cout<<"\nThe winner is Player 1!!";
 }
 
 /*void print2Boards(Board p1_board, Board p2_board, int player) {

@@ -11,8 +11,9 @@ public:
     Bowman();
     Bowman(int, char, int, char, int);
     void setDamagePerHit(int);
-    int getDamagePerHit();
-    int hit( Pieces**,int);
+    int getDamagePerHit() override {
+        return this->damage_per_hit;
+    }
 };
 
 
