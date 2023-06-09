@@ -17,9 +17,9 @@ Mage::Mage(int life, char ch, int damage, char row, int column) : Ranged(life,ch
 void Mage::setDamagePerHit(int damage) {
 	this->damage_per_hit = damage;
 }
-int Mage::getDamagePerHit() {
+/*int Mage::getDamagePerHit() {
 	return this->damage_per_hit;
-}
+}*/
 int Mage::getLimit() {
 	return use_limit;
 }

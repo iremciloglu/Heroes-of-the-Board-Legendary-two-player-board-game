@@ -16,7 +16,7 @@ Spearman::Spearman(int life, char ch, int damage, char row, int column) : Melee(
 void Spearman::setDamagePerHit(int damage) {
 	this->damage_per_hit = damage;
 }
-int Spearman::getDamagePerHit() {
+/*int Spearman::getDamagePerHit() {
 	return this->damage_per_hit;
-}
+}*/
 

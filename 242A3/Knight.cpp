@@ -17,9 +17,9 @@ Knight::Knight(int life, char ch, int damage, char row, int column) : Melee(life
 void Knight::setDamagePerHit(int damage) {
 	this->damage_per_hit = damage;
 }
-int Knight::getDamagePerHit() {
+/*int Knight::getDamagePerHit() {
 	return this->damage_per_hit;
-}
+}*/
 int Knight::getLimit() {
 	return use_limit;
 }

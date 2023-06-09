@@ -11,15 +11,16 @@ Ranger::Ranger() : Melee() {
     this->damage_per_hit = 6;
     this->use_limit = 2;
 }
-Ranger::Ranger(int life, char ch, int damage, char row, int column, int count) : Melee(life, ch, column, row) {
+Ranger::Ranger(int life, char ch, int damage, char row, int column) : Melee(life, ch, column, row) {
     this->damage_per_hit = damage;
+    this->use_limit = 2;
 }
 void Ranger::setDamagePerHit(int damage) {
     this->damage_per_hit = damage;
 }
-int Ranger::getDamagePerHit() {
+/*int Ranger::getDamagePerHit() {
     return this->damage_per_hit;
-}
+}*/
 int Ranger::getLimit() {
     return use_limit;
 }

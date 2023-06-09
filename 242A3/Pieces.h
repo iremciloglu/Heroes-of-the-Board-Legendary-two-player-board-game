@@ -15,8 +15,8 @@ public:
     int getLife();
     char getCharacter();
     void setCharacter(int);
-    virtual void setDamagePerHit(int);
-    virtual int getDamagePerHit();
+    virtual void setDamagePerHit(int) {};
+    virtual int getDamagePerHit() { return 0; }
     Pieces& operator=(const Pieces&);
 };
 #endif

@@ -11,7 +11,9 @@ public:
 	Ranger();
 	Ranger(int, char, int, char, int);
 	void setDamagePerHit(int);
-	int getDamagePerHit();
+	int getDamagePerHit()override {
+		return this->damage_per_hit;
+	}
 	int getLimit();
 };
 

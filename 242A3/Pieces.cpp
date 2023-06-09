@@ -24,8 +24,6 @@ void Pieces::setCharacter(int C) {
 char Pieces::getCharacter() {
     return this->character;
 }
-void Pieces::setDamagePerHit(int) {}
-int Pieces::getDamagePerHit() { return 0; }
 
 Pieces& Pieces::operator=(const Pieces& std) {
     if (this == &std)

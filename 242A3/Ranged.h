@@ -14,6 +14,8 @@ public:
 	int getColumn();
 	void setRow(char);
 	char getRow();
+	void setDamagePerHit(int) {};
+	int virtual getDamagePerHit() override { return 0; };
 	Ranged(const Ranged&);
 };
 #endif

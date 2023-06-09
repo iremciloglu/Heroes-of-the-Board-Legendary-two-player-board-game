@@ -13,20 +13,14 @@ Elf::Elf() : Ranged() {
 }
 Elf::Elf(int life, char ch, int damage, char row, int column) : Ranged(life, ch, column, row) {
     this->damage_per_hit = damage;
+    use_limit = 3;
 }
 void Elf::setDamagePerHit(int damage) {
     this->damage_per_hit = damage;
 }
-int Elf::getDamagePerHit() {
+/*int Elf::getDamagePerHit() {
     return this->damage_per_hit;
-}
+}*/
 int Elf::getLimit() {
     return use_limit;
-}
-void Elf::setCount(int count) {
-    if(count<=this->use_limit)
-        this->count = count;
-}
-int Elf::getCount() {
-    return this->count;
 }
