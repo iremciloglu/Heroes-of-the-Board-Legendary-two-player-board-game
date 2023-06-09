@@ -18,9 +18,22 @@ void Pieces::setLife(int life) {
 int Pieces::getLife() {
     return life;
 }
+void Pieces::setCharacter(int C) {
+    this->character = C;
+}
 char Pieces::getCharacter() {
     return character;
 }
 void Pieces::setDamagePerHit(int) {}
 int Pieces::getDamagePerHit() { return 0; }
-Pieces::Pieces(const Pieces&){}
+
+Pieces& Pieces::operator=(const Pieces& std) {
+    if (this == &std)
+    {
+        return *this;
+    }
+    this->life = std.life;
+    this->character = std.character;
+
+    return *this;
+}

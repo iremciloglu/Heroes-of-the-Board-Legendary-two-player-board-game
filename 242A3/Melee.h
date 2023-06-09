@@ -16,6 +16,7 @@ public:
     int getColumn();
     void setRow(char);
     char getRow();
+    void setDamagePerHit(int) {};
     Melee(const Melee&);
 
 };

@@ -7,15 +7,14 @@ class Elf : public Ranged {
 private:
     int damage_per_hit;
     int use_limit;
-    int count;
 public:
     Elf();
-    Elf(int, char, int, char, int, int);
+    Elf(int, char, int, char, int);
     void setDamagePerHit(int);
-    int getDamagePerHit();
+    int getDamagePerHit()override {
+        return this->damage_per_hit;
+    }
     int getLimit();
-    void setCount(int);
-    int getCount();
 };
 
 

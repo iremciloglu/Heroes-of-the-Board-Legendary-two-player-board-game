@@ -6,17 +6,16 @@ and my team - mate only */
 #include "Spearman.h"
 
 Spearman::Spearman() : Melee() {
-	this->life = 6;
-	this->character = 'S';
-	this->damage_per_hit = 3;
+    this->life = 6;
+    this->character = 'S';
+    this->damage_per_hit = 3;
 }
 Spearman::Spearman(int life, char ch, int damage, char row, int column) : Melee(life, ch, column, row) {
-	this->damage_per_hit = damage;
+    this->damage_per_hit = damage;
 }
 void Spearman::setDamagePerHit(int damage) {
-	this->damage_per_hit = damage;
+    this->damage_per_hit = damage;
 }
-int Spearman::getDamagePerHit() {
+/*int Spearman::getDamagePerHit() {
 	return this->damage_per_hit;
-}
-
+}*/

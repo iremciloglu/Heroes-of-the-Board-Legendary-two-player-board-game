@@ -9,24 +9,34 @@ using namespace std;
 
 class Board {
 private:
-Pieces *p[4][3];
+    int row_num;
+    int column_num;
+    Pieces** p;
+    int mage_count;
+    int knight_count;
+    int elf_count;
+    int ranger_count;
 public:
     Board();
-    void getPiece(void);
-void showPiece(int x,int y);
-Pieces getPieceInfo(int x,int y);
-void printBoard(int i);
-bool isEmptyCoordinate(int x,int y);
-void addPiece(int x,int y,char c);
-void show_All_Pieces(void);
-bool checkCharacter(char character);
-int hit(Pieces** board2, int player,int row);
+    Board(Pieces**, int, int);
+    int getRowNum();
+    void setRowNum(int);
+    int getColumnNum();
+    void setColumnNum(int);
+    Pieces** getPieces(void);
+    void setPieces(Pieces**);
+    void showPiece(int, int);
+    // Pieces getPieceInfo(int x, int y);
+    void printBoard(int, int);
+    bool isEmptyCoordinate(int, int);
+    bool addPiece(int, int, char);
+    bool checkCharacter(char);
+    int getMageCount(void);
+    int getElfCount(void);
+    int getKnightCount(void);
+    int getRangerCount(void);
+    ~Board();
+    Board& operator=(const Board&);
 };
-
-
-
-
-
-
 
 #endif //FINALGAME_BOARD_H
