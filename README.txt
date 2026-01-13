@@ -1,17 +1,12 @@
----------------------------------------------------------
-CNG242 Programming Language Concepts
-Assignment 3
-Heroes of the Board: Legendary two-player board game
 
-İrem Çiloğlu 2385292 - Turgut Canberk Diner 2453157
----------------------------------------------------------
+# CNG242 Programming Language Concepts
+## Assignment 3
+### Heroes of the Board: Legendary two-player board game
 
-İrem Çiloğlu used Visual Studio 2019 16.11.11 as IDE/Compiler.
-Turgut Canberk Diner used CLion 2022.3.3 as IDE/Compiler.
+#### Team Members:
+- İrem Çiloğlu 2385292 7
+- Turgut Canberk Diner 2453157
 
-Tested Platform: Windows 10.
-
-We did not notice any bugs.
 
 In project, we decide which player will play with mod of 2 starting with a random number.
 Then, the game asks the player which character s/he wants to play with. After we 
@@ -35,9 +30,3 @@ In our project, hit functionality works like this:
 	- If all positions in the row is empty, then the piece shoots the enemy player.
 
 Then, we continue with the other player until one of the player's life is zero.
-
-We prefer these dates for demo session:
-	- 21 of June 11:00
-	- 21 of June 12:00
-	- 21 of June 13:00
-	- 21 of June 14:00
