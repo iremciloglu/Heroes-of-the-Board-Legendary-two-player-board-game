@@ -3,7 +3,7 @@
 ### Heroes of the Board: Legendary two-player board game
 
  Team Members:
-- İrem Çiloğlu 2385292 7
+- İrem Çiloğlu 2385292 
 - Turgut Canberk Diner 2453157
 
 
@@ -29,5 +29,6 @@ In our project, hit functionality works like this:
 	- If all positions in the row is empty, then the piece shoots the enemy player.
 
 Then, we continue with the other player until one of the player's life is zero.
+
 
 
